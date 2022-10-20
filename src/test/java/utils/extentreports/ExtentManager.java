@@ -8,10 +8,11 @@ public class ExtentManager {
 
     public synchronized static ExtentReports createExtentReports() {
         ExtentSparkReporter reporter = new ExtentSparkReporter("./extent-reports/extent-report.html");
-        reporter.config().setReportName("Sample Extent Report");
+        reporter.config().setReportName("Assignment 5");
         extentReports.attachReporter(reporter);
-        extentReports.setSystemInfo("Blog Name", "SW Test Academy");
-        extentReports.setSystemInfo("Author", "Onur Baskirt");
+        extentReports.setSystemInfo("Student", "Temir Mendigali");
+        extentReports.setSystemInfo("Teacher", "Kymbat Khairosheva");
+        extentReports.setSystemInfo("Subject", "Software Quality Assurance and Testing");
         return extentReports;
     }
 }

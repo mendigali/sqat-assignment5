@@ -1,33 +1,37 @@
 package tests;
 
+import org.testng.annotations.Test;
+import java.lang.reflect.Method;
+
 import static utils.extentreports.ExtentTestManager.startTest;
 
-import java.lang.reflect.Method;
-import org.testng.annotations.Test;
-
 public class LoginTests extends BaseTest {
-    @Test(priority = 0, description = "Invalid Login Scenario with wrong username and password.")
-    public void invalidLoginTest_InvalidUserNameInvalidPassword(Method method) {
-        //ExtentReports Description
-        startTest(method.getName(), "Invalid Login Scenario with invalid username and password.");
+    @Test(priority = 0, description = "Successful login test case.")
+    public void successfulUserLogin(Method method) {
+        startTest(method.getName(), "Successful login test case.");
 
-        homePage
-            .goToN11()
-            .goToLoginPage()
-            .loginToN11("onur@swtestacademy.com", "11122233444")
-            .verifyLogError();
+        loginPage
+                .open()
+                .login("standard_user", "secret_sauce");
     }
 
-    @Test(priority = 1, description = "Invalid Login Scenario with empty username and password.")
-    public void invalidLoginTest_EmptyUserEmptyPassword(Method method) {
-        //ExtentReports Description
-        startTest(method.getName(), "Invalid Login Scenario with empty username and password.");
+    @Test(priority = 1, description = "Invalid login test case with wrong error message.")
+    public void invalidUserLoginWithWrongErrorMsg(Method method) {
+        startTest(method.getName(), "Invalid login test case.");
 
-        homePage
-            .goToN11()
-            .goToLoginPage()
-            .loginToN11("", "")
-            .verifyLoginUserName("Lütfen e-posta adresinizi girin.")
-            .verifyLoginPassword("WRONG MESSAGE FOR FAILURE!");
+        loginPage
+                .open()
+                .login("wrong_user", "qwerty123")
+                .verifyLoginUsernameAndPassword("EEEpic sadface: Username and password do not match any user in this service");
+    }
+
+    @Test(priority = 2, description = "Invalid login test case with wrong error message.")
+    public void invalidUserLoginWithTrueErrorMsg(Method method) {
+        startTest(method.getName(), "Invalid login test case.");
+
+        loginPage
+                .open()
+                .login("wrong_user", "qwerty123")
+                .verifyLoginUsernameAndPassword("Epic sadface: Username and password do not match any user in this service");
     }
 }

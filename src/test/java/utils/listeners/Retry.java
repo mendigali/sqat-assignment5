@@ -1,7 +1,5 @@
 package utils.listeners;
 
-import static utils.extentreports.ExtentTestManager.getTest;
-
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -10,22 +8,23 @@ import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
 import tests.BaseTest;
 
-public class Retry implements IRetryAnalyzer {
+import static utils.extentreports.ExtentTestManager.getTest;
 
-    private        int count  = 0;
-    private static int maxTry = 1; //Run the failed test 2 times
+public class Retry implements IRetryAnalyzer {
+    private static int maxTry = 1;
+    private int count = 0;
 
     @Override
     public boolean retry(ITestResult iTestResult) {
-        if (!iTestResult.isSuccess()) {                     //Check if test not succeed
-            if (count < maxTry) {                           //Check if maxTry count is reached
-                count++;                                    //Increase the maxTry count by 1
-                iTestResult.setStatus(ITestResult.FAILURE); //Mark test as failed and take base64Screenshot
-                extendReportsFailOperations(iTestResult);   //ExtentReports fail operations
-                return true;                                //Tells TestNG to re-run the test
+        if (!iTestResult.isSuccess()) {
+            if (count < maxTry) {
+                count++;
+                iTestResult.setStatus(ITestResult.FAILURE);
+                extendReportsFailOperations(iTestResult);
+                return true;
             }
         } else {
-            iTestResult.setStatus(ITestResult.SUCCESS);     //If test passes, TestNG marks it as passed
+            iTestResult.setStatus(ITestResult.SUCCESS);
         }
         return false;
     }
@@ -35,6 +34,6 @@ public class Retry implements IRetryAnalyzer {
         WebDriver webDriver = ((BaseTest) testClass).getDriver();
         String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BASE64);
         getTest().log(Status.FAIL, "Test Failed",
-            getTest().addScreenCaptureFromBase64String(base64Screenshot).getModel().getMedia().get(0));
+                getTest().addScreenCaptureFromBase64String(base64Screenshot).getModel().getMedia().get(0));
     }
 }

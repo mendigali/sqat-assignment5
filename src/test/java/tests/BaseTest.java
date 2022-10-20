@@ -5,12 +5,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import pages.HomePage;
+import pages.LoginPage;
 import utils.logs.Log;
 
 public class BaseTest {
     public WebDriver driver;
-    public HomePage  homePage;
+    public LoginPage loginPage;
 
     public WebDriver getDriver() {
         return driver;
@@ -19,12 +19,13 @@ public class BaseTest {
     @BeforeClass
     public void classLevelSetup() {
         Log.info("Tests is starting!");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
         driver = new ChromeDriver();
     }
 
     @BeforeMethod
     public void methodLevelSetup() {
-        homePage = new HomePage(driver);
+        loginPage = new LoginPage(driver);
     }
 
     @AfterClass
