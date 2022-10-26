@@ -1,4 +1,4 @@
-package utils.listeners;
+package utils;
 
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.OutputType;
@@ -8,12 +8,10 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import tests.BaseTest;
-import utils.extentreports.ExtentManager;
-import utils.logs.Log;
 
 import java.util.Objects;
 
-import static utils.extentreports.ExtentTestManager.getTest;
+import static utils.ExtentTestManager.getTest;
 
 public class TestListener extends BaseTest implements ITestListener {
     private static String getTestMethodName(ITestResult iTestResult) {

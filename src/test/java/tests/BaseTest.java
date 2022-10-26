@@ -6,7 +6,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pages.LoginPage;
-import utils.logs.Log;
+import utils.Log;
 
 public class BaseTest {
     public WebDriver driver;

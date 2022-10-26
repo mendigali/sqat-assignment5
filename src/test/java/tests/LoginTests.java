@@ -3,7 +3,7 @@ package tests;
 import org.testng.annotations.Test;
 import java.lang.reflect.Method;
 
-import static utils.extentreports.ExtentTestManager.startTest;
+import static utils.ExtentTestManager.startTest;
 
 public class LoginTests extends BaseTest {
     @Test(priority = 0, description = "Successful login test case.")
