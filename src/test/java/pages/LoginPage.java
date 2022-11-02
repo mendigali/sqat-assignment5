@@ -1,12 +1,15 @@
 package pages;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import utils.Log;
 
 import static org.testng.AssertJUnit.assertEquals;
 
 public class LoginPage extends BasePage {
+    private static final Logger Log = LogManager.getLogger(LoginPage.class);
+
     String baseURL = "https://www.saucedemo.com";
     By usernameInput = By.id("user-name");
     By passwordInput = By.id("password");

@@ -1,1 +1,5 @@
-# Assignment 5 | Software Quality Assurance and Testing | Khairosheva Kymbat
+# Assignment 5
+
+* Student: Temir Mendigali
+* Teacher: Kymbat Khairosheva
+* Subject: Software Quality Assurance and Testing

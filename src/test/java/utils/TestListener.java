@@ -1,6 +1,8 @@
 package utils;
 
 import com.aventstack.extentreports.Status;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -14,25 +16,27 @@ import java.util.Objects;
 import static utils.ExtentTestManager.getTest;
 
 public class TestListener extends BaseTest implements ITestListener {
+    private static final Logger Log = LogManager.getLogger(TestListener.class);
+
     private static String getTestMethodName(ITestResult iTestResult) {
         return iTestResult.getMethod().getConstructorOrMethod().getName();
     }
 
     @Override
     public void onStart(ITestContext iTestContext) {
-        Log.info("Running onStart method " + iTestContext.getName());
+        Log.warn("Running onStart method " + iTestContext.getName());
         iTestContext.setAttribute("WebDriver", this.driver);
     }
 
     @Override
     public void onFinish(ITestContext iTestContext) {
-        Log.info("Running onFinish method " + iTestContext.getName());
+        Log.warn("Running onFinish method " + iTestContext.getName());
         ExtentManager.extentReports.flush();
     }
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        Log.info(getTestMethodName(iTestResult) + " test is starting.");
+        Log.warn(getTestMethodName(iTestResult) + " test is starting.");
     }
 
     @Override
@@ -44,6 +48,7 @@ public class TestListener extends BaseTest implements ITestListener {
     @Override
     public void onTestFailure(ITestResult iTestResult) {
         Log.info(getTestMethodName(iTestResult) + " test is failed.");
+        Log.error(getTestMethodName(iTestResult) + " test is failed.");
 
         Object testClass = iTestResult.getInstance();
         WebDriver driver = ((BaseTest) testClass).getDriver();
@@ -59,10 +64,5 @@ public class TestListener extends BaseTest implements ITestListener {
     public void onTestSkipped(ITestResult iTestResult) {
         Log.info(getTestMethodName(iTestResult) + " test is skipped.");
         getTest().log(Status.SKIP, "Test Skipped");
-    }
-
-    @Override
-    public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
-        Log.info("Test failed but it is in defined success ratio " + getTestMethodName(iTestResult));
     }
 }

@@ -1,14 +1,17 @@
 package tests;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pages.LoginPage;
-import utils.Log;
 
 public class BaseTest {
+    private static final Logger Log = LogManager.getLogger(BaseTest.class);
+
     public WebDriver driver;
     public LoginPage loginPage;
 
